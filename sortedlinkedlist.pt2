@@ -1,0 +1,108 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+typedef struct Node{
+int data;
+struct node* next;
+}Node;
+Node* first;
+Node* second;
+Node* third;
+void create(int A[] , int N);
+void print(Node* x);
+void merge(Node* x , Node* y);
+bool isloop(Node*x);
+int main()
+{int A[5] = {50,40,30,0,55};
+int A2[5] = {60 , 45, 35,25,15};
+int size = sizeof(A)/sizeof(A[0]);
+create(A , size);
+create2(A2 , size);
+print(first);
+print(second);
+merge(first , second);
+//merged list is the third
+print(third);
+printf("%d" , isloop(first));
+
+    return 0;
+}
+bool isloop(Node* x){
+Node* q = (Node*)malloc(sizeof(Node));
+Node* p = (Node*)malloc(sizeof(Node));
+
+}
+void merge(Node* x , Node* y){
+third = (Node *)malloc(sizeof(Node));
+Node* last = (Node*)malloc(sizeof(Node));
+if(x->data < y->data){
+    third = x;
+    last = x;
+    x = x->next;
+    last->next = NULL;
+}
+else{
+    third = y;
+    last = y;
+    y = y->next;
+    last->next = NULL;
+}
+while(x != NULL && y != NULL){
+        if(x->data < y->data){
+              last->next = x;
+              last = x;
+              x = x->next;
+              last->next = NULL;
+        }
+        else{
+            last->next = y;
+              last = y;
+              y = y->next;
+              last->next = NULL;
+        }
+    if(x != NULL){
+       last->next = x;
+    }
+    else{
+        last->next = y;
+    }
+
+
+}
+}
+void print(Node* x){
+while(x != NULL){
+    printf("%d " , x->data);
+    x = x->next;
+}
+printf("\n");
+
+}
+void create(int A[] , int N){
+first = (Node*)malloc(sizeof(Node));
+Node* last = (Node *)malloc(sizeof(Node));
+first->data = A[0];
+first->next = NULL;
+last = first;
+for(int i = 1 ; i < N ; i++){
+Node* t = (Node *)malloc(sizeof(Node));
+t->data = A[i];
+t->next = NULL;
+last->next = t;
+last = t;
+}
+}
+void create2(int A[] , int N){
+second = (Node*)malloc(sizeof(Node));
+Node* last = (Node *)malloc(sizeof(Node));
+second->data = A[0];
+second->next = NULL;
+last = second;
+for(int i = 1 ; i < N ; i++){
+Node* t = (Node *)malloc(sizeof(Node));
+t->data = A[i];
+t->next = NULL;
+last->next = t;
+last = t;
+}
+}
