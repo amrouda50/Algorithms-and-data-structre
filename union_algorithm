@@ -1,0 +1,69 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+typedef struct array{
+    int *A;
+    int size;
+    int length;
+}array;
+
+void initialize(array *x){
+printf("Enter the size of array:\n");
+scanf("%d" , &x->size);
+x->A = (int *)malloc(x->size);
+x->length = 0;
+
+}
+void insert (array* x , int value){
+if(x->length < x->size){
+x->A[x->length] = value;
+x->length++;}
+
+}
+void display(array* x){
+for(int i = 0 ; i < x->length ; i++){
+    printf("%d\n" , x->A[i]);
+}
+}
+
+bool member(array *x , int y , int cnt){
+int i = 0;
+while(i < cnt && x->A[i] != y){
+    i++;
+
+}
+return (i == cnt);
+}
+
+array* union_(array x , array y){
+array* third ;
+third = (array *)malloc(sizeof(array));
+third->size = (x.size + y.size);
+third->length = x.length;
+third->A = (int *)malloc(sizeof(third->size)*sizeof(int));
+for(int i = 0 ; i < x.length ; i++){
+    third->A[i] = x.A[i];
+    printf("%d\n" , third->A[i]);
+}
+return third;
+}
+
+int main()
+{
+array first;
+array second;
+initialize(&first);
+initialize(&second);
+
+//insert for 1st array
+insert(&first , 5); insert(&first , 6); insert(&first , 7);
+//insert for 2nd array
+insert(&second , 6); insert(&second, 10); insert(&second , 11);
+array *third = union_(first , second);
+/*
+for(int i = 0 ; i < 6 ; i++){
+    printf("%d\n" , third->A[i]);
+}*/
+
+//display(&first);
+}
