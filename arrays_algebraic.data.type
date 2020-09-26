@@ -1,0 +1,90 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
+typedef struct vector{
+
+int *A[50];
+int length;
+int size;
+
+}vector;
+void initiallization (vector *x){
+printf("Enter the size of array:\n");
+scanf("%d" , &x->length);
+x->size = 0;
+}
+void print(vector x){
+    for(int i = 0 ; i < x.size ; i++){
+printf("%d\n" , x.A[i]);}
+}
+void pushback(vector *x , int value){
+x->A[x->size] = (int *)malloc(sizeof(int));
+x->A[x->size] = value;
+x->size++;
+}
+void insert_at(vector* x , int index , int value){
+      //printf("%d  l" , x->length);
+       //printf("%d   i" , index);
+if(index < x->length){
+for(int i = x->length ; i > index ; i--){
+
+    x->A[i] = x->A[i-1];
+    if(i ==  (index+1)){
+        x->A[index] = value;
+    }
+}
+x->size++;
+}
+
+}
+void get(vector x , int index){
+if(index >= 0 && index <= x.size){
+   printf("%d\n" , x.A[index]);
+}
+
+}
+void set(vector x , int index , int value){
+if(index >= 0 && index <= x.size){
+    x.A[index] = value;
+}
+
+}
+void Reverse(vector *arr)
+{
+int *B;
+int i,j;
+B=(int *)malloc(arr->size*sizeof(int));
+for(i=arr->size-1,j=0;i>=0;i--,j++)
+B[j]=arr->A[i];
+for(i=0;i<arr->size;i++)
+arr->A[i]=B[i];
+}
+_Bool issorted(vector omar){
+    int i = 1;
+    bool issort;
+    while(i < omar.size &&  omar.A[i] > omar.A[i-1]){
+        i++;
+    }
+   return issort = (i == omar.size);
+
+}
+int main()
+{vector omar;
+initiallization(&omar);
+pushback(&omar , 5);
+pushback(&omar , 6);
+pushback(&omar , 7);
+pushback(&omar , 8);
+pushback(&omar , 9);
+//insert_at(&omar , 4 , 5);
+print(omar);
+//Reverse(&omar);
+//get(omar , 3);
+//set(omar , 3 , 4);
+//printf("%d\n" , omar.size);
+//shiftnrotate(&omar);
+printf("%d" , issorted(omar));
+
+    return 0;
+}
