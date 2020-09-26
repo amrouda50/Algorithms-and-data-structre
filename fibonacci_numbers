@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <stdlib.h>
+//fibonacci
+int fibonacci(int n){
+    if(n <= 1){
+       return n;
+}
+return  fibonacci(n-2) + fibonacci(n-1);
+
+}
+int main()
+{int n;
+scanf("%d" , &n);
+for(int i = 0 ; i < n ; i++){
+    printf("%d " ,fibonacci(i));
+
+}
+    return 0;
+}
+
+
+//tribonacci
+int tribonacci(int n){
+    if(n <= 2){
+       return n;
+}
+return tribonacci(n-3) + tribonacci(n-2) + tribonacci(n-1);
+
+}
+int main()
+{int n;
+scanf("%d" , &n);
+for(int i = 0 ; i < n ; i++){
+    printf("%d " ,tribonacci(i));
+
+}
+    return 0;
+}
