@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{int array[5] = {3,8,9,7,6};
+int n = 5;
+int numofrotation;
+scanf("%d" , &numofrotation);
+int j = 0;
+while(j < numofrotation){
+
+
+int i;
+for(i = -1 ; i < (n-1) ; i++){
+    array[i] = array[i+1];
+}
+array[i] = array[-1];
+j++;
+}
+for(int i = 0 ; i < n ; i++){
+printf("%d " , array[i]);
+
+}
+    return 0;
+}
