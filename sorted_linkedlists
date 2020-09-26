@@ -1,0 +1,163 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include<stdbool.h>
+typedef struct Node{
+int data;
+struct Node* next;
+}Node;
+Node* first;
+Node* second;
+void initialize(Node *x ,int value){
+x->data = value;
+x->next = NULL;
+}
+void insert_last(Node* x , int val){
+    Node *t =(Node *)malloc(sizeof(Node));
+    t->data = val;
+while(x->next != NULL){
+        x = x->next;
+    }
+
+    x->next = t;
+    t->next = NULL;
+    }
+
+
+void display(Node* x){
+while(x != NULL){
+    printf("%d " , x->data);
+    x = x->next;
+}
+printf("\n");
+
+}
+void sort_insert(Node* x , int value){
+Node* t = (Node*)malloc(sizeof(Node));
+t->data = value;
+Node* q = (Node*)malloc(sizeof(Node));
+if(value < x->data){
+    t->next = first;
+    first = t;
+    return;
+}
+
+while(x->data < value){
+q = x;
+x = x->next;
+if(x->next == NULL && value > x->data){
+    x->next = t;
+    t->next = NULL;
+        return;
+}
+if(x->data < value){
+q = q->next;
+}
+else{
+    q->next = t;
+    t->next = x;
+}
+
+}
+}
+void delete(Node* x , int val){
+if(first->data == val){
+    first = first->next;
+    free(x);
+}
+else{
+Node* q = (Node*)malloc(sizeof(Node));
+q = x;
+while(x->data != val){
+    x = x->next;
+    if(x->data != val){
+    q = x;}
+    else{
+        q->next = x->next;
+        free(x);
+        return;
+    }
+}
+
+}
+}
+bool sort_check(Node* x){
+int minval = -2147483647;
+while(x != NULL){
+    if(x->data >= minval){
+        minval = x->data;
+        x = x->next;
+    }
+    else{
+        return false;
+    }
+}
+return true;
+}
+void remove_dup(Node* x){
+Node* t = (Node*)malloc(sizeof(Node));
+t = x->next;
+while(t != NULL){
+if(x->data == t->data){
+    x->next = t->next;
+    free(t);
+    t = x->next;
+}
+else{
+    x = t;
+    t = t->next;
+}}
+}
+//using sliding pointers
+//note u can also use it by putting it into array and then reversing
+void reverse_list(Node* p){
+Node* q = (Node*)malloc(sizeof(Node));
+q = NULL;
+Node* r = (Node*)malloc(sizeof(Node));
+r = NULL;
+while(p != NULL){
+    r = q;
+    q=p;
+    p = p->next;
+    q->next = r;
+
+}
+first = q;
+}
+void recursive_reverse(Node* q , Node* p){
+if(p != NULL){
+   recursive_reverse(p , p->next);
+   p->next = q;
+}else{
+first = q;
+}
+
+
+}
+void concatenate(Node* x , Node* y){
+while(x->next != NULL){
+    x = x->next;
+}
+x->next = y;
+}
+void merge(Node* x , Node* y){
+
+
+}
+int main()
+{
+//first linked list
+first = (Node *)malloc(sizeof(Node));
+initialize(first , 1);
+insert_last(first , 3);
+insert_last(first , 4);
+insert_last(first , 6);
+insert_last(first , 8);
+sort_insert(first  , 7);
+sort_insert(first , 3);
+sort_insert(first , 0);
+sort_insert(first , 10);
+sort_insert(first , 9);
+delete(first , 0);
+delete(first , 10 );
+printf("%d\n", sort_check(first));
+remove_dup(first);
