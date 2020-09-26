@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <stdlib.h>
+//Can also be used with loops
+//Can be used with ADT array
+int binarysearch(int l , int h , int value , int *array){
+int mid = (l+h)/2;
+if(l<=h){
+    if(value == array[mid]){
+        return mid;
+    }
+    else if(value > array[mid]){
+        l = mid + 1;
+        return binarysearch( l , h , value , array);
+    }
+    else if (value < array[mid]){
+        h = mid - 1;
+    return binarysearch( l , h , value , array);
+    }
+
+}
+return -1;
+}
+
+
+
+int main()
+{int array[] = {1,2,3,4,5,6,7,8,9,10};
+ int h = sizeof(array)/sizeof(array[0]);
+ int l = 0;
+printf("%d" , binarysearch( l , h , 10, array));
+    return 0;
+}
