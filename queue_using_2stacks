@@ -1,0 +1,93 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+typedef struct stack{
+int size;
+int* a;
+int top;
+}stack;
+stack first;
+stack second;
+
+void initialize(stack* x , int size){
+x->a = (int*)malloc(sizeof(int)*size);
+x->top = -1;
+x->size = size;
+}
+int isempty(stack x){
+if(x.top == -1){
+    return 1;
+}
+return 0;
+
+}
+void push(stack* x , int val){
+int y = -1;
+if(x->top == x->size){
+    printf("Stack is full");
+}
+else{
+    x->top++;
+    x->a[x->top] = val;
+    y = val;
+}
+//return y;
+
+}
+int pop(stack* x){ int y = -1;
+if(x->top == -1){
+    printf("Stack is empty");
+}
+else{
+y = x->a[x->top];
+x->top--;
+
+}
+return y;
+}
+void display(){
+    if(isempty(first)){
+for(int i = second.top ; i >= 0 ; i--){
+    printf("%d " , second.a[i]);
+}
+    }
+    else{
+        for(int i = 0 ; i <= first.top  ; i++){
+    printf("%d " , first.a[i]);
+    }
+
+}
+}
+void enqueue(int val){
+push(&first , val);
+}
+int dequeue(){ int x = -1;
+if(isempty(second)){
+        if(isempty(first)){
+    printf("the queue is empty");
+    return x;
+    }
+    else{
+  while(!isempty(first)){
+    push(&second , pop(&first));
+  }
+}
+}
+
+return pop(&second);
+
+}
+void main()
+{int a[] = {5,6,7,8,9};
+
+initialize(&first , 5);
+initialize(&second , 5 );
+enqueue(5);
+enqueue(6);
+enqueue(7);
+enqueue(8);
+enqueue(9);
+dequeue();
+display();
+
+}
