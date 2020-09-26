@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct queue{
+int front;
+int rear;
+int* q;
+int size;
+
+}queue;
+void initialize(queue* x , int size){
+x->front = x->rear = -1;
+x->size = size;
+x->q = (int*)malloc(sizeof(int)*size);
+
+}
+void enqueue(queue* x , int val){
+if(x->rear == x->size - 1){
+    printf("queue is full!\n");
+}
+else{
+    x->rear++;
+    x->q[x->rear] = val;
+}
+
+}
+void dequeue(queue* x){ int y;
+if(x->front == x->rear){
+    printf("The queue is empty\n");
+}
+else{
+    x->front++;
+    y = x->q[x->front];
+    if(x->front == x->rear){
+            printf("queue is empty (reseting the queue)\n");
+        x->front = x->rear = -1;
+    }
+}
+return y;
+}
+void display(queue x){
+    for(int i = x.front+1 ; i <= x.rear ; i++){
+        printf("%d " , x.q[i]);
+    }
+}
+int main()
+{queue first;int size;
+printf("Enter the queue size:\n");
+scanf("%d" , &size);
+initialize(&first , size );
+enqueue(&first , 5);
+enqueue(&first , 6);
+enqueue(&first , 7);
+enqueue(&first , 8);
+enqueue(&first , 9);
+dequeue(&first);
+dequeue(&first);
+dequeue(&first);
+dequeue(&first);
+dequeue(&first);
+enqueue(&first , 9);
+display(first);
+
+    return 0;
+}
