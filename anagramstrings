@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
+bool isanagram(char string[] , char string1[]){
+//length check
+if(strlen(string) != strlen(string1)){
+    return false;
+}
+//hashing algorithm
+else{
+ int helper[26] = {0};
+ int j;
+ for(int i = 0 , j = 0 ; string1[i] != '\0' , string[i] != '\0' ; i++ , j++){
+    helper[((int)string[i])- 97] += 1;
+    helper[((int)string1[j])-97] += 1;
+ }
+ //decision algorithm
+int i = 0;
+while( i <= 26 && helper[i] != 1) i++;
+if(i > 26) return true;
+else return false;
+}
+}
+
+int main()
+{char fststring[] = "verbose";
+char sndstring[] = "observe";
+printf("%d" , isanagram(fststring , sndstring));
+    return 0;
+}
