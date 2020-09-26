@@ -1,0 +1,96 @@
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct Node{
+struct Node* prev;
+int data;
+struct Node* next;
+
+}Node;
+Node* first;
+void create(int A[] , int n ){
+Node* t , *last ;
+int i;
+first = (Node*)malloc(sizeof(Node));
+first->data =A[0];
+first->prev = NULL;
+first->next = NULL;
+last = first;
+for(i = 1 ; i < n ; i++){
+    t = (Node*)malloc(sizeof(Node));
+    t->data = A[i];
+    t->next = NULL;
+    t->prev = last;
+    last->next = t;
+    last = t;
+}
+}
+void display(Node* x){
+while(x != NULL){
+    printf("%d " , x->data);
+    x = x->next;
+}
+
+}
+void insert(Node* x , int index , int value){
+Node* t = (Node*)malloc(sizeof(Node));
+t->data = value;
+if(index == 0){
+    t->prev = NULL;
+    t->next = x;
+    x->prev = t;
+    first = t;
+
+}
+else{
+    for(int i = 1 ; i < index-1; i++){
+        x = x->next;
+    }
+    t->next = x->next;
+    t->prev = x;
+   if(x->next){
+ x->next->prev = t;
+   }
+   x->next = t;
+}
+}
+void delete(Node* x , int index){
+if(index == 0){
+first = first->next;
+first->prev = NULL;
+free(x);
+}
+else{
+    int i ;
+    for(i = 0 ; i < index ; i++){
+        x = x->next;
+    }
+    x->prev->next = x->next;
+    if(x->next != NULL){
+    x->next->prev = x->prev;
+    }
+    free(x);
+}
+
+}
+void reverse(Node* x){
+Node* temp;
+while(x!= NULL){
+temp = x->next;
+x->next = x->prev;
+x->prev = temp;
+x = x->prev;
+if(x !=NULL && x->next == NULL){
+   first = x;
+}
+
+}
+}
+int main()
+{int A[] = {1,2,3,4};
+create(A , 4);
+insert(first , 5 , 12321);
+delete(first , 4);
+reverse(first);
+display(first);
+    return 0;
+}
