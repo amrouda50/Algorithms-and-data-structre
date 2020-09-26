@@ -1,0 +1,97 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+typedef struct stack{
+int top;
+int size;
+int *s;
+}stack;
+void initialize(stack* x){
+printf("Enter size of stack:\n");
+scanf("%d" , &x->size);
+x->s = (int*)malloc(sizeof(stack));
+x->top = -1;
+
+}
+bool is_empty(stack *x){
+if(x->top == -1){
+    return 1;
+}
+return 0;
+
+}
+bool full(stack* x){
+if(x->top == x->size-1){
+    return 1;
+}else{
+return 0;
+}
+}
+void push(stack* x , int n){
+if(x->top < x->size-1){
+x->top++;
+x->s[x->top] = n;
+}
+else{
+printf("Stack OverFlow\n");
+}
+}
+void display(stack x){
+int i = 0;
+while(i <= x.top){
+   printf("%d " , x.s[i]);
+   i++;
+}
+printf("\n");
+
+}
+void pop(stack *x){
+int y = -1;
+if(is_empty(x)){
+    printf("Stack Underflow\n");
+}
+else{
+    y = x->s[x->top];
+    x->top--;
+}
+return y;
+}
+int peek(stack x , int pos){
+int y = -1;
+if(x.top - pos +1 < 0){
+    printf("Invalid number");
+
+}
+else{
+    y = x.s[x.top - pos +1];
+    return y;
+}
+}
+int stack_top(stack x){
+if(x.top == -1){
+    return -1;
+}
+else{
+    return x.s[x.top];
+}
+
+}
+
+int main()
+{stack first;
+initialize(&first);
+push(&first , 5);
+push(&first , 6);
+push(&first , 6);
+push(&first , 6);
+push(&first , 6);
+printf("%d\n" , is_empty(&first));
+pop(&first);
+display(first);
+printf("%d\n" , stack_top(first));
+printf("%d" , peek(first , 4));
+//printf("%d" , first.s[0]);
+
+
+    return 0;
+}
