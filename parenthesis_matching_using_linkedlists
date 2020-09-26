@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
+typedef struct Node{
+char data;
+struct Node* next;
+}Node;
+Node* first ;
+
+void push(Node* x , char y){
+Node* t = (Node*)malloc(sizeof(Node));
+if(t == NULL){
+    printf("stack is full");
+}
+else{
+ t->data = y;
+ t->next = first;
+ first = t;
+
+}
+}
+void display(Node* x ){
+while(x !=NULL){
+    printf("%c" , x->data);
+    x = x->next;
+}
+
+}
+void pop(Node* x){
+if(x == NULL){
+    printf("Stack is empty");
+}
+else{
+    Node* t = (Node*)malloc(sizeof(Node));
+    t = x;
+    first = first->next;
+    free(t);
+}
+}
+
+bool is_balanced(char* exp){
+//first =(Node*)malloc(sizeof(Node));
+//first = NULL;
+for(int i = 0 ;exp[i] != '\0', i < strlen(exp) ; i++){
+if(exp[i] == '('){
+  push(first , exp);
+   }
+   else if(exp[i] == ')'){
+        if(first == NULL){
+            return 0;
+        }
+    pop(first);
+   }
+
+}
+if(first == NULL){
+    return 1;
+}
+return 0;
+
+}
+
+int main()
+{char* exp= "((a+b)*(c-d))";
+printf("%d" , is_balanced(exp));
+    return 0;
+}
