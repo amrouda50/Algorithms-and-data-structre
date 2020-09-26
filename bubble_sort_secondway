@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <stdlib.h>
+void swap(int* small , int* big){
+int temp = *big;
+*big = *small;
+*small = temp;
+
+}
+int main()
+{ int array[] = {5,7,2,1,4,6};
+int size = sizeof(array) / sizeof(int);
+
+for(int i = 0 ; i < size-1 ; i++  ){
+    for(int j = size-1 ;  j > i  ; j--){
+        if(array[j-1] > array[j]){
+            swap(&array[j] , &array[j-1]);
+
+        }
+    }
+}
+for(int i = 0 ; i < size ; i++){
+    printf("%d " , array[i]);
+}
+    return 0;
+}
+
