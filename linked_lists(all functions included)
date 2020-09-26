@@ -1,0 +1,186 @@
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct Node{
+int data;
+struct Node *next;
+}Node;
+Node *first ;
+
+void create(int A[] , int N){
+Node *last,*t;
+first = (Node*)malloc(sizeof(Node));
+first->data = A[0];
+first->next = NULL;
+last = first;
+for(int i = 1 ; i < N ; i++){
+t = (Node *)malloc(sizeof(Node));
+t->data = A[i];
+t->next = NULL;
+last->next = t;
+last = t;
+}
+}
+int count (Node* x){int cnt = 0;
+while(x != NULL){
+    cnt++;
+    x = x->next;
+}
+printf("%d\n" , cnt);
+return cnt;
+
+}
+void display(Node* x){
+while(x != NULL){
+    printf("%d " , x->data);
+    x = x->next;
+}
+
+}
+int recursion_count(Node* x){
+if(x == 0){
+    return 0;
+}
+else{
+    return recursion_count(x->next) + 1;
+}
+
+}
+int summation(Node* x){
+    int sum = 0;
+while(x != NULL){
+    sum = sum + x->data;
+    x = x->next;
+}
+return sum;
+
+}
+void reverse_display(Node* x){
+if(x == NULL){
+    return;}
+    reverse_display(x->next);
+ printf("%d" , x->data);
+
+
+}
+
+int recursion_summation(Node* x){
+if(x == 0){
+    return 0;
+}
+else{
+    return recursion_summation(x->next)+ x->data;
+}
+}
+int max_value(Node* x){
+int maxval = x->data;
+while(x != NULL){
+    if(x->data > maxval){
+        maxval = x->data;
+    }
+    x = x->next;
+}
+return maxval;
+}
+int recursion_maxval(Node* x){
+    static int maxval  = -2147483647;
+    if(x == 0){
+        return maxval;
+    }
+    else{
+    if(x->data > maxval){
+        maxval = x->data;
+    }
+    return recursion_maxval(x->next);
+
+    }
+}
+Node* search(Node* x , int key){
+   while(x != NULL){
+    if(x->data == key){
+        return x->data;
+    }
+    x = x->next;
+   }
+   return -1;
+}
+Node* recursion_search(Node* x , int key){
+if(x->data ==key){
+        return x;
+}
+else{
+    return recursion_search(x->next , key);
+}
+return -1;
+}
+//move_node moves a node to the beginning using search
+void move_node(Node *x , int key){
+    Node *y = NULL;
+    while(x != NULL ){
+    if(x->data == key){
+       y->next = x->next;
+       x->next = first;
+       first = x;
+       break;
+    }
+    else{
+        y = x;
+        x = x->next;
+
+    }
+    }
+}
+void insert(Node* x ,int index ,int value){
+Node *t = (Node *)malloc(sizeof(Node));
+t->data = value;
+if(index < 0  || index > count(x)){
+return;
+}
+if(index == 0){
+t->next = first;
+first = t;
+}
+else{
+    for(int i = 0 ; i < index-1 ;i++){
+        x = x->next;
+    }
+    t->next = x->next;
+    x->next = t;
+}
+}
+//make a new node at the very beginning
+void insert_first(Node* x , int num){
+Node* t;
+t = (Node*)malloc(sizeof(Node));
+t->data = num;
+t->next = first;
+first = t;
+}
+void insert_last(Node* x , int value){
+Node* t = (Node *)malloc(sizeof(Node));
+t->data = value;
+while(x->next != NULL){
+    x = x->next;
+}
+x->next = t;
+t->next = NULL;
+}
+//ALL the normal functions are present but i use the recursion funtions in the main
+int main()
+{
+int A[] = {1,2,9,2,1 , 5 , 6, 6,5,11, 123123,32,11,2};
+int size = sizeof(A)/sizeof(A[0]);
+create(A , size);
+printf("%d\n" , recursion_count(first));
+printf("%d\n" , recursion_summation(first));
+printf("%d\n" , recursion_maxval(first));
+printf("%p\n" , recursion_search(first , 11));//returns the address of the int mentioned
+move_node(first , 9);
+insert_first(first , 19);
+insert(first , 5 , 4);
+insert_last(first , 1);
+insert_last(first , 5);
+display(first);
+//reverse_display(first);
+
+    return 0;
+}
