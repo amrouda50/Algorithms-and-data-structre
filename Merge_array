@@ -1,0 +1,61 @@
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct array{
+int *A;
+int size;
+int length;
+}array;
+
+int main()
+{array array1;
+array1.A = (int *)malloc(sizeof(int)*5);
+array1.size = 5;
+array1.A[0] = 3;array1.A[1] = 4;array1.A[2] = 5;array1.A[3] = 6;array1.A[4] = 10;
+array array2;
+array2.A = (int *)malloc(sizeof(int)*5);
+array2.size = 5;
+array2.A[0] = 2;array2.A[1] = 4;array2.A[2] = 5;array2.A[3] = 7;array2.A[4] = 12;
+array merge;
+merge.A = (int *)malloc(sizeof(array1) + sizeof(array2));
+merge.size = array2.size + array1.size;
+merge.length = 0;
+int j = 0 ; int i = 0;
+while(i < array1.size && i < array2.size){
+    if(array1.A[i] > array2.A[j]){
+        merge.A[merge.length] = array2.A[j];
+        merge.length++;
+        j++;
+    }
+    else if(array1.A[i] < array2.A[j]){
+        merge.A[merge.length] = array1.A[i];
+        merge.length++;
+        i++;
+    }
+    else{
+        merge.A[merge.length] = array2.A[j];
+        merge.length++;
+        j++;
+       merge.A[merge.length] = array1.A[i];
+        merge.length++;
+        i++;
+    }
+}
+
+
+if(i == array1.size){
+    for(j ;j < array2.size ; j++){
+    merge.A[merge.length] = array2.A[j];
+      merge.length++;
+    }
+}
+else{
+    for(i ;i < array1.size ; i++){
+    merge.A[merge.length] = array1.A[i];
+    merge.length++;
+    }
+}
+for(int i = 0 ; i < merge.length ; i++){
+    printf("%d " , merge.A[i]);
+}
+    return 0;
+}
