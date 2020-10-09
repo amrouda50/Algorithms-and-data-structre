@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <stdlib.h>
+void insert_heap(int A[] , int n){
+    int temp;
+    int i = n;
+    temp = A[n];
+    while(i >= 1 && temp > A[i/2] ){
+        A[i] = A[i/2];
+        i = i/2;
+    }
+    A[i] = temp;
+}
+int main()
+{int array[10] ={40,35,15,30,10,12,6,5,20};
+int x = 60;
+int last_index = sizeof(array)/sizeof(int) - 1;
+array[last_index] = x;
+insert_heap(array , last_index);
+for(int i = 0  ; i < last_index ; i++){
+printf("%d " , array[i]);
+}
+    return 0;
+}
