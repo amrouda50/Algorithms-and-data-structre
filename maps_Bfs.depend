@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1616540939 source:c:\users\lenovo\desktop\c and c++\maps_bfs\main.c
+	<stdio.h>
+	<stdlib.h>
+	"queue.h"
+
+1615852928 c:\users\lenovo\desktop\c and c++\maps_bfs\queue.h
+	<stdio.h>
+	<stdlib.h>
+
